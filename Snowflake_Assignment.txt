@@ -33,7 +33,7 @@ from SALES_DATA;
 
 
 -- 5.) FIND OUT THE FINAL PROFIT AND PUT IT IN COLUMN FOR EVERY ORDER ID.
-select *, sum(PROFIT) over() as Final_Profit from SALES_DATA;
+SELECT order_id, SUM(profit) AS final_profit FROM SALES_DATA GROUP BY order_id;
 
 
 --6.) Create a new column called process days and calculate how many days it takes for each order id to process from the order to its shipment.
