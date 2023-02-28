@@ -52,7 +52,6 @@ case
       when process_days<=3 then '5'
       when process_days>3 and process_days<=6 then '4'
       when process_days>6 and process_days<=10 then '3'
-      when process_days>10 then '2'
-    else process_days
+    else '2'
   end as Rating
 from SALES_DATA;
