@@ -1,9 +1,30 @@
 -- 1.) Load the given dataset into snowflake with a primary key to Order Date column.
-alter table SALES_DATA
-ADD PRIMARY KEY (order_date);
+CREATE or replace table SALES_DATA
+(    order_id VARCHAR2(30),
+     order_date VARCHAR2(30) PRIMARY KEY,
+     ship_date VARCHAR2(30),
+     ship_mode VARCHAR2(30),
+     customer_name VARCHAR2(50),
+     segment VARCHAR2(50),
+     state VARCHAR2(50),
+     country VARCHAR2(50),
+     market VARCHAR2(50),
+     region VARCHAR(50),
+     product_id VARCHAR2(50),
+     category VARCHAR2(40),
+     sub_category VARCHAR2(90),
+     product_name string,
+     sales int,
+     quantity number,
+     discount float,
+     profit float,
+     shipping_cost float,
+     order_priority CHAR(50),
+     year int
+);
 
 
--- Change the Primary key to Order Id Column.
+-- 2.) Change the Primary key to Order Id Column.
 ALTER TABLE SALES_DATA
 DROP PRIMARY KEY;
 
@@ -11,7 +32,7 @@ alter table SALES_DATA
 ADD PRIMARY KEY (order_id);
 
 
--- 2.) Check the data type for Order date and Ship date and mention in what data type it should be?
+-- 3.) Check the data type for Order date and Ship date and mention in what data type it should be?
 alter table SALES_DATA
 alter order_date set data type date;
 
@@ -19,12 +40,12 @@ alter table SALES_DATA
 alter ship_date set data type date;
 
 
--- 3.) Create a new column called order_extract and extract the number after the last ‘–‘from Order ID column.
+-- 4.) Create a new column called order_extract and extract the number after the last ‘–‘from Order ID column.
 SELECT SPLIT_PART(ORDER_ID, '-', 3) AS order_extract
 FROM SALES_DATA; 
 
 
--- 4.) Create a new column called Discount Flag and categorize it based on discount. Use ‘Yes’ if the discount is greater than zero else ‘No’.
+-- 5.) Create a new column called Discount Flag and categorize it based on discount. Use ‘Yes’ if the discount is greater than zero else ‘No’.
 select *, case
      when DISCOUNT>0 then 'YES'
      else 'NO'
@@ -32,7 +53,7 @@ select *, case
 from SALES_DATA;
 
 
--- 5.) FIND OUT THE FINAL PROFIT AND PUT IT IN COLUMN FOR EVERY ORDER ID.
+-- FIND OUT THE FINAL PROFIT AND PUT IT IN COLUMN FOR EVERY ORDER ID. (THIS QUESTION WAS NOT IN AN ASSIGNMENT OF DASHBOARD BUT SIR HAS GIVEN THIS QUESTION TO DO !!)
 SELECT order_id, SUM(profit) AS final_profit FROM SALES_DATA GROUP BY order_id;
 
 
